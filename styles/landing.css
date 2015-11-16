@@ -29,6 +29,12 @@
      position: relative;
      padding: 2rem;
      text-align: center;
+     /* assignment 22 transition start */
+     transition-property: background-color, color; 
+     transition-duration: 2s;
+     transition-timing-function: ease-in;
+     background-color: skyblue;
+     /* end assignment 22 transition */
  }
  
  .point .point-title {
