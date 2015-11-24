@@ -28,6 +28,24 @@ var albumMarconi = {
     ]
 };
 
+//Assignment 25 - Create a third album object
+
+var myAlbum = {
+    name: 'Learning To Code',
+    artist: 'Jean Juliano',
+    label: 'JJ',
+    year: '2015',
+    albumARtUrl: 'assets/images/album_covers/03.png',
+    songs: [
+        { name: 'HTML is like the Skeleton', length: '1:01' },
+        { name: 'CSS gives me color', length: '5:01' },
+        { name: 'Javascript makes me move', length: '3:21' },
+        { name: 'DOM Wha?', length: '3:14' },
+        { name: 'Too many JC libraries', length: '2:15' }
+    ]
+};
+
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -40,24 +58,21 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
-    //#1
-    var albumTitle = document.getElementsByClassName('album-view-title')[0];
-    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
-    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
     
-    //#2
     albumTitle.firstChild.nodeValue = album.name;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
     
-    //#3
     albumSongList.innerHTML = '';
     
-    //#4
     for (i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
     }
@@ -65,5 +80,15 @@ var setCurrentAlbum = function(album) {
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    
+    var albums = [albumPicasso, albumMarconi, myAlbum];
+    var index = 1;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);
+        index++;
+        if (index == albums.length) {
+            index = 0;
+        }
+    });
 };
 
