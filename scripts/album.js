@@ -3,7 +3,7 @@ var albumPicasso = {
     artist: 'Pablo Picasso',
     label: 'Cubism',
     year: '1881',
-    albumARtUrl: 'assets/images/album_covers/01.png',
+    albumArtUrl: 'assets/images/album_covers/01.png',
     songs: [
         { name: 'Blue', length: '4:26' },
         { name: 'Green', length: '3:14' },
@@ -18,7 +18,7 @@ var albumMarconi = {
     artist: 'Guglielmo Marconi',
     label: 'EM',
     year: '1909',
-    albumARtUrl: 'assets/images/album_covers/20.png',
+    albumArtUrl: 'assets/images/album_covers/20.png',
     songs: [
         { name: 'Hello, Operator?', length: '1:01' },
         { name: 'Ring, ring, ring', length: '5:01' },
@@ -35,7 +35,7 @@ var myAlbum = {
     artist: 'Jean Juliano',
     label: 'JJ',
     year: '2015',
-    albumARtUrl: 'assets/images/album_covers/03.png',
+    albumArtUrl: 'assets/images/album_covers/03.png',
     songs: [
         { name: 'HTML is like the Skeleton', length: '1:01' },
         { name: 'CSS gives me color', length: '5:01' },
