@@ -103,8 +103,7 @@ var getSongItem = function(element) {
             return;
     }
 };
-                                         
-
+                                        
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
@@ -116,7 +115,7 @@ var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 //Store state of playing songs
-var currentlyPlayingSong = null;
+var currentlyPlayingSong = null; //set to null so no song is identified as playing until one is clicked
 
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
