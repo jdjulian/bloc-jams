@@ -78,14 +78,35 @@ var setCurrentAlbum = function(album) {
     }
 };
 
-//Checkpoint 27- code below looks up the DOM tree to select parent element
+//Assignment 27- code below looks up the DOM tree to select parent element
+
+//next 2 variables are used to test updated findParentByClassName 
+var albumChild = document.getElementsByClassName('album-view-artist')[0]; 
+var mainParent = document.querySelector('html'); //this is used to test because 'html' doesn't have a parent
+
 var findParentByClassName = function(element, targetClass) {
     var currentParent = element.parentElement;
-    while (currentParent.className != targetClass) {
+    
+    //if current parent exists
+    if (currentParent) { 
+        //both must be true in order for while to run
+        while (currentParent.className && currentParent.className != targetClass) {
         currentParent = currentParent.parentElement;
+        }
+        
+        if (currentParent.className == targetClass) {
+            return currentParent;
+        } else {
+            alert("No parent with that class name found.");
+        }
+    } else {
+        alert("No parent found.");
     }
-    return currentParent;
 };
+//called to check to see if currentParent exists
+findParentByClassName(albumChild, 'album');
+// findParentByClassName(albumChild, 'fosterChild'); //no parent with that class name found
+// findParentByClassName(mainParent, 'album'); //no parent found
 
 var getSongItem = function(element) {
     switch (element.className) {
