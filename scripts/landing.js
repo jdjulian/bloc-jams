@@ -14,7 +14,7 @@ var animatePoints = function() {
 
 $(window).load(function() {
     //#1
-    if ($(window).height() > 950 {
+    if ($(window).height() > 950) {
         animate.points();
     }
     //#2
@@ -27,4 +27,4 @@ $(window).load(function() {
             animatePoints();
         }
     });
-)});
+});
