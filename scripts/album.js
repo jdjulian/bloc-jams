@@ -14,6 +14,13 @@ var setSong = function(songNumber) {
     setVolume(currentVolume);
 };
 
+//checkpoint 34
+var seek = function(time) {
+    if (currentSoundFile) {
+        currentSoundFile.setTime(time);
+    }
+};
+
 var setVolume = function(volume) {
     if (currentSoundFile) {
         currentSoundFile.setVolume(volume);
@@ -50,17 +57,27 @@ var clickHandler = function() {
         //Switch from Play -> Pause button to indicate new song is playing.
         setSong(songNumber);
         currentSoundFile.play();
-        $(this).html(pauseButtonTemplate);
+        //Checkpoint 34 update
+        updateSeekBarWhileSongPlays();
         currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
-        //currentlyPlayingSongNumber = songNumber;
-        //currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+        
+        //checkpoint 34
+        var $volumeFill = $('.volume .fill');
+        var $volumeThumb = $('.volume .thumb');
+        $volumeFill.width(currentVolume + '%');
+        $volumeThumb.css({left: currentVolume + '%'});
+        
+        $(this).html(pauseButtonTemplate);
         updatePlayerBarSong();
-    } else if (currentlyPlayingSongNumber === songNumber) {
+    } 
+    else if (currentlyPlayingSongNumber === songNumber) {
                 // Switch from Pause -> Play button to pause currently playing song.
         if (currentSoundFile.isPaused()) {
             $(this).html(playButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPauseButton);
             currentSoundFile.play();
+                //Checkpoint 34 update
+            updateSeekBarWhileSongPlays();
         } else {
             $(this).html(playButtonTemplate);
             $('.main-controls .play-pause').html(playerBarPlayButton);
@@ -159,6 +176,12 @@ var setupSeekBars = function() {
         //#4
         var seekBarFillRatio = offsetX / barWidth;
         
+        if ($(this).parent().attr('class') == 'seek-control') {
+            seek(seekBarFillRatio * currentSoundFile.getDuration());
+        } else {
+            setVolume(seekBarFillRatio * 100);
+        }
+        
         //#5
         updateSeekPercentage($(this), seekBarFillRatio);
     });
@@ -172,6 +195,12 @@ var setupSeekBars = function() {
             var offsetX = event.pageX - $seekBar.offset().left;
             var barWidth = $seekBar.width();
             var seekBarFillRatio = offsetX / barWidth;
+            
+            if ($seekBar.parent().attr('class') == 'seek-control') {
+                seek(seekBarFillRatio * currentSoundFile.getDuration());
+            } else {
+                setVolume(seekBarFillRatio);
+            }
             
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
@@ -194,7 +223,7 @@ var nextSong = function() {
         return index == 0 ? currentAlbum.songs.length : index;
     };
     
-    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     // Note that we're _incrementing_ the song here
     currentSongIndex++;
     
@@ -208,9 +237,8 @@ var nextSong = function() {
     //CHECKPOINT 32
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
-    clickHandler.updateSeekBarWhileSongPlays();
-    nextSong.updateSeekBarWhileSongPlays();
-    previousSong.updateSeekBarWhileSongPlays();
+        //Checkpoint 34 update
+    updateSeekBarWhileSongPlays();
     updatePlayerBarSong();
 
     // Update the Player Bar information
@@ -250,10 +278,8 @@ var previousSong = function() {
      //CHECKPOINT 32
     setSong(currentSongIndex + 1);
     currentSoundFile.play();
-    clickHandler.updateSeekBarWhileSongPlays();
-    nextSong.updateSeekBarWhileSongPlays();
-    previousSong.updateSeekBarWhileSongPlays();
-    updatePlayerBarSong();
+        //Checkpoint 34 update
+    updateSeekBarWhileSongPlays();
     updatePlayerBarSong();
 
     // Update the Player Bar information
